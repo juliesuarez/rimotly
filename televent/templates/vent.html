@@ -1,0 +1,244 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vet Findings Details</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            background-image: url('{% static "images/pig.jpg" %}');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        .container {
+            max-width: 800px;
+        }
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        .card-header {
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            color: white;
+            border-bottom: none;
+            padding: 20px;
+        }
+        .form-control, .form-select {
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 12px;
+            transition: all 0.3s;
+        }
+        .form-control:focus, .form-select:focus {
+            border-color: #2ecc71;
+            box-shadow: 0 0 0 0.25rem rgba(46, 204, 113, 0.25);
+        }
+        .form-label {
+            font-weight: 600;
+            color: #555;
+            margin-bottom: 8px;
+        }
+        .btn-custom {
+            background-color: #2ecc71;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 24px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        .btn-custom:hover {
+            background-color: #27ae60;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(39, 174, 96, 0.3);
+        }
+        .icon-input {
+            position: relative;
+        }
+        .icon-input i {
+            position: absolute;
+            top: 50%;
+            left: 12px;
+            transform: translateY(-50%);
+            color: #777;
+        }
+        .icon-input .form-control {
+            padding-left: 40px;
+        }
+        .symptom-tag {
+            display: inline-block;
+            background-color: #e1f5e1;
+            color: #27ae60;
+            padding: 5px 10px;
+            margin: 5px;
+            border-radius: 20px;
+            font-size: 0.9em;
+        }
+        .symptom-tag .remove {
+            cursor: pointer;
+            margin-left: 5px;
+            color: #c0392b;
+        }
+    </style>
+</head>
+<body>
+    <div class="container my-5">
+        <div class="card">
+            <div class="card-header text-center">
+                <h2 class="mb-0">
+                    <i class="fas fa-paw me-2"></i>Vet Findings Details
+                </h2>
+            </div>
+            <div class="card-body p-4">
+                <form id="vetFindingsForm" method="POST" action="{% url 'home' %}">
+                    {% csrf_token %}
+                    <div class="mb-4 icon-input">
+                        <label for="breedType" class="form-label">Pig Breed</label>
+                        <i class="fas fa-paw"></i>
+                        <select class="form-select" id="breedType" name="type_of_breed" required>
+                            <option value="" disabled selected>Select a breed</option>
+                            <option value="Berkshire">Berkshire</option>
+                            <option value="Duroc">Duroc</option>
+                            <option value="Yorkshire">Yorkshire</option>
+                            <option value="Landrace">Landrace</option>
+                            <option value="Tamworth">Tamworth</option>
+                            <option value="Large Black">Large Black</option>
+                            <option value="Vietnamese Potbelly">Vietnamese Potbelly</option>
+                            <option value="Juliana">Juliana</option>
+                            <option value="Pietrain">Pietrain</option>
+                            <option value="Chester White">Chester White</option>
+                        </select>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col-md-6 icon-input">
+                            <label for="age" class="form-label">Size of the Pig</label>
+                            <select class="form-select" id="age" name="age" required>
+                                <option value="" disabled selected>Select size of the pig</option>
+                                <option value="young">Piglet</option>
+                                <option value="medium">Medium</option>
+                                <option value="old">Old Pig</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6 icon-input">
+                            <label for="diseaseType" class="form-label">Pig Disease Identified</label>
+                            <i class="fas fa-virus"></i>
+                            <select class="form-select" id="diseaseType" name="type_of_disease" required>
+                                <option value="" disabled selected>Select a disease</option>
+                                <option value="Swine Flu">Swine Flu</option>
+                                <option value="African Swine Fever">African Swine Fever</option>
+                                <option value="PRRS">Porcine Reproductive and Respiratory Syndrome (PRRS)</option>
+                                <option value="Porcine Parvovirus">Porcine Parvovirus</option>
+                                <option value="Leptospirosis">Leptospirosis</option>
+                                <option value="Foot and Mouth Disease">Foot and Mouth Disease</option>
+                                <option value="Transmissible Gastroenteritis">Transmissible Gastroenteritis</option>
+                                <option value="Actinobacillus pleuropneumonia">Actinobacillus pleuropneumonia</option>
+                                <option value="Erysipelas">Erysipelas</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4 icon-input">
+                        <label for="symptoms" class="form-label">Special Symptoms Identified</label>
+                        <i class="fas fa-notes-medical"></i>
+                        <textarea class="form-control" id="symptoms" name="symptoms" rows="3" placeholder="Describe any special symptoms"></textarea>
+                    </div>
+                    <div class="mb-4 icon-input">
+                        <label for="location" class="form-label">Location</label>
+                        <i class="fas fa-map-marker-alt"></i>
+                        <input type="text" class="form-control" id="location" name="location" required>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-custom btn-lg">
+                            <i class="fas fa-save me-2"></i>Submit Findings
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer style="background-color: #2ecc71; color: white; text-align: center; padding: 10px; font-size: 0.9em; position: relative; bottom: 0; width: 100%; margin-top:0px;">
+        <p>Developed by Rimotly &copy; 2024</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('vetFindingsForm');
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Perform form validation
+                if (form.checkValidity()) {
+                    // If form is valid, show loading state
+                    Swal.fire({
+                        title: 'Submitting...',
+                        text: 'Please wait',
+                        allowOutsideClick: false,
+                        showConfirmButton: false,
+                        willOpen: () => {
+                            Swal.showLoading();
+                        }
+                    });
+
+                    // Submit the form
+                    fetch(form.action, {
+                        method: 'POST',
+                        body: new FormData(form),
+                        headers: {
+                            'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Success!',
+                                text: 'Vet findings submitted successfully!',
+                                confirmButtonColor: '#2ecc71'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    form.reset();
+                                }
+                            });
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: 'Something went wrong!',
+                                confirmButtonColor: '#2ecc71'
+                            });
+                        }
+                    })
+                    .catch(error => {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'An error occurred while submitting the form.',
+                            confirmButtonColor: '#2ecc71'
+                        });
+                    });
+                } else {
+                    // If form is invalid, show error message
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Validation Error',
+                        text: 'Please fill in all required fields correctly.',
+                        confirmButtonColor: '#2ecc71'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
