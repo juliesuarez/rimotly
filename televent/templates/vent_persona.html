@@ -1,0 +1,91 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Speaker Profile</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f4f4f9;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .container {
+            margin-top: 50px;
+            max-width: 800px;
+        }
+        .profile-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            text-align: center;
+        }
+        .profile-card img {
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            margin-bottom: 20px;
+        }
+        .profile-card h2 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: #2ecc71;
+        }
+        .profile-card p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+        .section-title {
+            margin-top: 30px;
+            font-weight: bold;
+            color: #333;
+            text-align: left;
+        }
+        .list-group-item {
+            border: none;
+            padding-left: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="profile-card">
+            <img src="{% static 'images/joram.jpeg' %}" alt="Speaker Profile Picture">
+            <h2>Joram Kakumba</h2>
+            <p><em>Ventinary Officer</em></p>
+
+            <div class="bio-section">
+                <h4 class="section-title">Biography</h4>
+                <p>
+                    Joram Kakumba is a Ventinary Officer in agricultural industry with over 2 years. He has worked on numerous farms in Uganda that have transformed the 
+                    the health of the animals on the farm.
+                </p>
+            </div>
+
+            <div class="experience-section">
+                <h4 class="section-title">Experience</h4>
+                <ul class="list-group">
+                    <li class="list-group-item">2 years in agricultural industry</li>
+                    <li class="list-group-item">Worked on over 10 farms</li>
+                    <li class="list-group-item">Worked on different types of animals</li>
+                </ul>
+            </div>
+
+            <div class="expertise-section">
+                <h4 class="section-title">Expertise</h4>
+                <ul class="list-group">
+                    <li class="list-group-item">Precision Agriculture</li>
+                    <li class="list-group-item">Diease detection</li>
+                    <li class="list-group-item">Sustainable Farming Practices</li>
+                    <li class="list-group-item">Crop Yield Optimization</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
